@@ -1,0 +1,51 @@
+{
+  "name": "bg-sound",
+  "description": "Web Component to emulate the old-school <bgsound> HTML element",
+  "version": "0.0.0",
+  "author": {
+    "name": "Feross Aboukhadijeh",
+    "email": "feross@feross.org",
+    "url": "https://feross.org"
+  },
+  "bugs": {
+    "url": "https://github.com/feross/bg-sound/issues"
+  },
+  "dependencies": {
+    "debug": "^3.1.0",
+    "timidity": "^1.0.1"
+  },
+  "devDependencies": {
+    "babel-minify": "^0.5.0",
+    "browserify": "^16.2.2",
+    "express": "^4.16.4",
+    "freepats": "^1.0.2",
+    "standard": "*"
+  },
+  "homepage": "https://bitmidi.com",
+  "keywords": [
+    "bgsound",
+    "mid file",
+    "midi",
+    "midi file",
+    "midi player",
+    "player",
+    "bg-sound",
+    "browser",
+    "web audio",
+    "background sound",
+    "bg sound",
+    "webcomponent",
+    "web component"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/feross/bg-sound.git"
+  },
+  "scripts": {
+    "build": "browserify -s BgSound -r ./ | minify > bg-sound.min.js",
+    "example": "node example/server.js",
+    "test": "standard"
+  }
+}
