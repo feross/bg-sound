@@ -11,7 +11,7 @@
 [standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
 [standard-url]: https://standardjs.com
 
-### Web Component to emulate the old-school <bgsound> HTML element
+### Web Component to emulate the old-school `<bgsound>` HTML element
 
 Play MIDI files in a browser with a simple Web Component.
 
