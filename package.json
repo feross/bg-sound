@@ -1,7 +1,7 @@
 {
   "name": "bg-sound",
   "description": "Web Component to emulate the old-school <bgsound> HTML element",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": {
     "name": "Feross Aboukhadijeh",
     "email": "feross@feross.org",
