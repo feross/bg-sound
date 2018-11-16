@@ -5,7 +5,7 @@ const Timidity = require('timidity')
 
 class BgSound extends HTMLElement {
   static get observedAttributes () {
-    return ['src']
+    return ['src', 'baseUrl']
   }
 
   constructor () {
