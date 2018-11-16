@@ -24,6 +24,7 @@ npm install bg-sound timidity freepats
 ## Usage
 
 ```html
+<script src="bg-sound.min.js"></script>
 <bg-sound src="sound.mid"></bg-sound>
 ```
 
