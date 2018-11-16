@@ -3,13 +3,6 @@
 const debug = require('debug')('bg-sound')
 const Timidity = require('timidity')
 
-const tmpl = document.createElement('template')
-tmpl.innerHTML = `
-  <style>:host { ... }</style> <!-- look ma, scoped styles -->
-  <b>I'm in shadow dom!</b>
-  <slot></slot>
-`
-
 class BgSound extends HTMLElement {
   static get observedAttributes () {
     return ['src']
@@ -19,11 +12,6 @@ class BgSound extends HTMLElement {
     super()
 
     this._playingFired = false
-
-    // Attach a shadow root to the element.
-    this.attachShadow({ mode: 'open' })
-    this.shadowRoot.appendChild(tmpl.content.cloneNode(true))
-
     this._onClick = this._onClick.bind(this)
   }
 
