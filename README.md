@@ -13,7 +13,8 @@
 
 ### Web Component to emulate the old-school `<bgsound>` HTML element
 
-Play MIDI files in a browser with a simple Web Component.
+Play MIDI files in a browser with a simple Web Component, emulating
+[`<bgsound>`, the Background Sound element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/bgsound).
 
 ## Install
 
@@ -24,14 +25,40 @@ npm install bg-sound timidity freepats
 ## Usage
 
 ```html
-<script src="bg-sound.min.js"></script>
 <bg-sound src="sound.mid"></bg-sound>
+<script src="bg-sound.min.js"></script>
 ```
 
-It's important to ensure that the `timidity` and `freepats` folders in `node_modules` are being served, as they contain the WebAssembly code and instrument sounds, respectively.
+## Talk
 
-For example, here is how to mount the necessary files at `/` with the `express`
-server:
+I introduced this project in a talk at [JSConf Colombia 2018](https://jsconf.co/).
+
+[![The Lost Art of MIDI talk](img/slide.png)](https://speakerdeck.com/feross/the-lost-art-of-midi-bringing-back-to-the-web)
+
+- [Slides](https://speakerdeck.com/feross/the-lost-art-of-midi-bringing-back-to-the-web)
+- Talk video (coming soon!)
+
+## FAQ
+
+### Why is the tag called `<bg-sound>` (with a dash)?
+
+The name of a custom HTML element must contain a dash (-). This is what the spec says, presumably because otherwise browsers could not introduce new HTML tags without web compatibility risk.
+
+### Why is the script tag required?
+
+The script tag is needed to define the behavior of the `<bg-sound>` HTML element. Without it, the browser would just treat the tag like a `<div>`.
+
+### Why are the `timidity` and `freepats` packages required?
+
+The `<bg-sound>` custom element lazily loads a WebAssembly file and instrument
+sounds at runtime.
+
+The `timidity` package provides the WebAssembly file (`libtimidity.wasm`). The
+`freepats` package provides the instrument sound files.
+
+It's important to ensure that the `timidity` and `freepats` folders in
+`node_modules` are being served to the public. For example, here is how to mount
+the necessary files at `/` with the `express` server:
 
 ```js
 const timidityPath = path.dirname(require.resolve('timidity'))
@@ -49,12 +76,6 @@ The default `baseUrl` is `/`.
 ```js
 <bg-sound src="sound.mid" baseUrl="/custom-path"></bg-sound>
 ```
-
-## Talk
-
-I introduced this project at JSConf Colombia 2018.
-
-[![The Lost Art of MIDI talk](img/slide.png)](https://speakerdeck.com/feross/the-lost-art-of-midi-bringing-back-to-the-web)
 
 ## Demo
 
