@@ -50,24 +50,30 @@ The default `baseUrl` is `/`.
 <bg-sound src="sound.mid" baseUrl="/custom-path"></bg-sound>
 ```
 
+## Talk
+
+I introduced this project at JSConf Colombia 2018.
+
+[![The Lost Art of MIDI talk](img/slide.png)](https://speakerdeck.com/feross/the-lost-art-of-midi-bringing-back-to-the-web)
+
 ## Demo
 
-This package is used on [BitMidi.com](https://bitmidi.com), the wayback machine for old-school MIDI files! Check out some examples here:
+If you like this, then check out [BitMidi.com](https://bitmidi.com), the wayback machine for old-school MIDI files! Check out some examples MIDIs here:
 
-- [Backstreet Boys - I Want It That Way MIDI](https://bitmidi.com/backstreet-boys-i-want-it-that-way-mid)
-- [Beethoven Moonlight Sonata MIDI](https://bitmidi.com/beethoven-moonlight-sonata-mid)
-- [Kingdom Hearts - Dearly Beloved MIDI](https://bitmidi.com/kingdom-hearts-dearly-beloved-mid)
-- [Camptown Races MIDI](https://bitmidi.com/camptown-mid)
-- [Michael Jackson - Billie Jean MIDI](https://bitmidi.com/michael-jackson-billie-jean-mid)
-- [Michael Jackson - Don't Stop Till You Get Enough MIDI](https://bitmidi.com/michael-jackson-dont-stop-till-you-get-enough-mid)
-- [Passenger - Let Her Go MIDI](https://bitmidi.com/passenger-let_her_go-mid)
-- [Red Hot Chili Peppers - Otherside MIDI](https://bitmidi.com/red-hot-chili-peppers-otherside-mid)
-- [Red Hot Chili Peppers - Californication MIDI](https://bitmidi.com/red-hot-chili-peppers-californication-mid)
-- [Golden Sun - Overworld MIDI](https://bitmidi.com/golden-sun-overworld-mid)
-- [Pokemon - Pokemon Center Theme MIDI](https://bitmidi.com/pokemon-pokemon-center-theme-mid)
-- [Pokemon Red Blue Yellow - Opening MIDI](https://bitmidi.com/pokemon-redblueyellow-opening-yellow-mid)
-- [Pokemon Red Blue Yellow - Wild Pokemon Battle MIDI](https://bitmidi.com/pokemon-redblueyellow-wild-pokemon-battle-mid)
-- [Legend of Zelda - Overworld MIDI](https://bitmidi.com/legend-of-zelda-overworld-mid)
+- [Adele - Skyfall](https://bitmidi.com/adele-skyfall-mid)
+- [Beatles - Imagine](https://bitmidi.com/beatles-imagine-mid)
+- [Beyonce - Crazy in Love](https://bitmidi.com/beyonce-crazy-in-love-mid)
+- [CANYON.MID](https://bitmidi.com/canyon-mid)
+- [Cowboy Bepop - Space Lion](https://bitmidi.com/cowboy-bepop-space-lion-mid)
+- [Eiffel 65 - Blue](https://bitmidi.com/dj-ali-eiffel-blue-mid)
+- [Kingdom Hearts - Dearly Beloved](https://bitmidi.com/kingdom-hearts-dearly-beloved-mid)
+- [Mario Bros. - Super Mario Bros. Theme](https://bitmidi.com/mario-bros-super-mario-bros-theme-mid)
+- [Passenger - Let Her Go](https://bitmidi.com/passenger-let_her_go-mid)
+- [Portal - Still Alive](https://bitmidi.com/portal-still-alive-mid)
+- [Rick Astley - Never Gonna Give You Up](https://bitmidi.com/r-astley-never-gonna-give-you-up-k-mid)
+- [Simpsons Theme Song](https://bitmidi.com/simpsons-mid)
+- [Sonic the Hedgehog - Green Hill Zone](https://bitmidi.com/sonic-the-hedgehog-green-hill-zone-mid)
+- [TOTO - Africa](https://bitmidi.com/toto-africa-k-mid)
 
 ## License
 
