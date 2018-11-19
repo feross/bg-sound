@@ -53,7 +53,7 @@ The script tag is needed to define the behavior of the `<bg-sound>` HTML element
 The `<bg-sound>` custom element lazily loads a WebAssembly file and instrument
 sounds at runtime.
 
-The `timidity` package provides the WebAssembly file (`libtimidity.wasm`). The
+The [`timidity`](https://github.com/feross/timidity) package provides the WebAssembly file (`libtimidity.wasm`). The
 `freepats` package provides the instrument sound files.
 
 It's important to ensure that the `timidity` and `freepats` folders in
