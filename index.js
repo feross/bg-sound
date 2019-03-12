@@ -28,13 +28,13 @@ class BgSound extends HTMLElement {
       this._playingFired = true
     })
     
-    this.playCount = 0;
+    this.playCount = 0
     this.player.on('ended', () => {
-      this.playCount++;
+      this.playCount++
       
       if (this.hasAttribute('loop')) {
         if(this.loop === "infinite" || parseInt(this.loop) > this.playCount)) {
-          this.player.play();
+          this.player.play()
         }
       }
     })
