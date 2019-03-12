@@ -33,7 +33,7 @@ class BgSound extends HTMLElement {
       this.playCount++
       
       if (this.hasAttribute('loop')) {
-        if(this.loop === "infinite" || parseInt(this.loop) > this.playCount)) {
+        if(this.loop === "infinite" || parseInt(this.loop) > this.playCount) {
           this.player.play()
         }
       }
