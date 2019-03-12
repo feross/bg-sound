@@ -5,7 +5,7 @@ const Timidity = require('timidity')
 
 class BgSound extends HTMLElement {
   static get observedAttributes () {
-    return ['src', 'baseUrl']
+    return ['src', 'baseUrl', 'loop']
   }
 
   constructor () {
@@ -27,6 +27,17 @@ class BgSound extends HTMLElement {
     this.player.on('playing', () => {
       this._playingFired = true
     })
+    
+    this.playCount = 0;
+    this.player.on('ended', () => {
+      this.playCount++;
+      
+      if (this.hasAttribute('loop')) {
+        if(this.loop === "infinite" || parseInt(this.loop) > this.playCount)) {
+          this.player.play();
+        }
+      }
+    })
 
     this.player.load(this.src)
     this.player.play()
@@ -45,6 +56,15 @@ class BgSound extends HTMLElement {
   set src (val) {
     this.setAttribute('src', val)
   }
+  
+  get loop () {
+    return this.getAttribute('loop')
+  }
+
+  set loop (val) {
+    this.setAttribute('loop', val)
+  }
+
 
   get baseUrl () {
     return this.getAttribute('baseUrl')
