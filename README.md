@@ -33,7 +33,7 @@ npm install bg-sound timidity freepats
 
 I introduced this project in a talk at [JSConf Colombia 2018](https://jsconf.co/).
 
-[![The Lost Art of MIDI talk](img/slide.png)](https://speakerdeck.com/feross/the-lost-art-of-midi-bringing-back-to-the-web)
+[![The Lost Art of MIDI talk](img/slide.png)](https://speakerdeck.com/feross/the-lost-art-of-midi-bringing-back-to-the-web) [![Greenkeeper badge](https://badges.greenkeeper.io/feross/bg-sound.svg)](https://greenkeeper.io/)
 
 - [Slides](https://speakerdeck.com/feross/the-lost-art-of-midi-bringing-back-to-the-web)
 - Talk video (coming soon!)
