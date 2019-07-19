@@ -19,14 +19,30 @@ Play MIDI files in a browser with a simple Web Component, emulating
 ## Install
 
 ```
-npm install bg-sound timidity freepats
+npm install bg-sound
 ```
 
 ## Usage
 
+Add a custom HTML element called `<bg-sound>`:
+
 ```html
-<bg-sound src="sound.mid"></bg-sound>
 <script src="bg-sound.min.js"></script>
+<bg-sound src="sound.mid"></bg-sound>
+```
+
+Automatically make legacy `<bgsound>` and `<embed>` HTML tags work:
+
+```html
+<!-- Must include *BEFORE* all <bgsound> and <embed> tags -->
+<script src="../bg-sound.min.js"></script>
+<script>BgSound.enableCompatMode()</script>
+
+<!-- All of the following HTML tags now work! -->
+<bgsound src="goldensun.mid">
+<embed src="goldensun.mid">
+<embed src="mario-death.mid" loop="2">
+<embed src="sound.wav">
 ```
 
 ## Talk
@@ -48,7 +64,15 @@ The name of a custom HTML element must contain a dash (-). This is what the spec
 
 The script tag is needed to define the behavior of the `<bg-sound>` HTML element. Without it, the browser would just treat the tag like a `<div>`.
 
-### Why are the `timidity` and `freepats` packages required?
+### Where do the WebAssembly code and instrument sound files come from?
+
+By default, these files will load remotely from [BitMidi](https://bitmidi.com). This is nice for simple demos and quick hacks. However, it is recommended to host these files yourself. (I reserve the right to remove the CORS headers which allow this to work at any time if too much bandwidth is used.)
+
+### What are the `timidity` and `freepats` packages?
+
+```bash
+npm install timidity freepats
+```
 
 The `<bg-sound>` custom element lazily loads a WebAssembly file and instrument
 sounds at runtime.
@@ -71,11 +95,33 @@ app.use(express.static(freepatsPath))
 Optionally, provide a `baseUrl` attribute to customize where the player will
 look for the lazy-loaded WebAssembly file `libtimidity.wasm` and the
 [FreePats General MIDI soundset](https://www.npmjs.com/package/freepats) files.
-The default `baseUrl` is `/`.
+The default `baseUrl` is `https://bitmidi.com/timidity/`.
 
 ```js
 <bg-sound src="sound.mid" baseUrl="/custom-path"></bg-sound>
 ```
+
+### How do I automatically make legacy `<bgsound>` and `<embed>` tags work?
+
+Include this code before any `<bgsound>` or `<embed>` HTML tags:
+
+```html
+<!-- Must include *BEFORE* all <bgsound> and <embed> tags -->
+<script src="../bg-sound.min.js"></script>
+<script>BgSound.enableCompatMode()</script>
+
+<!-- All of the following HTML tags now work! -->
+<bgsound src="goldensun.mid">
+<embed src="goldensun.mid">
+<embed src="mario-death.mid" loop="2">
+<embed src="sound.wav">
+```
+
+If you want to provide your own `baseUrl`, then simply pass that into the `BgSound.enableCompatMode()` function call as follows:
+
+```js
+BgSound.enableCompatMode({ baseUrl: '/custom-path' })
+````
 
 ## Demo
 

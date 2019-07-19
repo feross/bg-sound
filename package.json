@@ -13,7 +13,7 @@
   "dependencies": {
     "debug": "^4.1.1",
     "insert-css": "^2.0.0",
-    "timidity": "^1.0.1",
+    "timidity": "^1.1.1",
     "when-dom-ready": "^1.2.12"
   },
   "devDependencies": {

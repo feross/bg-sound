@@ -15,6 +15,8 @@ class BgSound extends HTMLElement {
 
     this._playingFired = false
     this._onClick = this._onClick.bind(this)
+    this._onPlaying = this._onPlaying.bind(this)
+    this._onEnded = this._onEnded.bind(this)
   }
 
   connectedCallback () {
@@ -24,31 +26,17 @@ class BgSound extends HTMLElement {
       this.setAttribute('baseUrl', 'https://bitmidi.com/timidity/')
     }
 
-    this.player = new Timidity(this.baseUrl)
+    if (!this.hasAttribute('loop')) {
+      this.setAttribute('loop', 0)
+    }
 
-    this.player.on('playing', () => {
-      this._playingFired = true
-    })
-    
     this.playCount = 0
-    this.player.on('ended', () => {
-      this.playCount++
-      
-      if (this.hasAttribute('loop')) {
-        if(this.loop === "infinite" || parseInt(this.loop) > this.playCount) {
-          this.player.play()
-        }
-      }
-    })
-
-    this.player.load(this.src)
-    this.player.play()
+    this._initPlayer()
   }
 
   disconnectedCallback () {
     document.removeEventListener('click', this._onClick)
-    this.player.pause()
-    this.player.destroy()
+    this._destroyPlayer()
   }
 
   get src () {
@@ -58,7 +46,7 @@ class BgSound extends HTMLElement {
   set src (val) {
     this.setAttribute('src', val)
   }
-  
+
   get loop () {
     return this.getAttribute('loop')
   }
@@ -66,7 +54,6 @@ class BgSound extends HTMLElement {
   set loop (val) {
     this.setAttribute('loop', val)
   }
-
 
   get baseUrl () {
     return this.getAttribute('baseUrl')
@@ -91,6 +78,37 @@ class BgSound extends HTMLElement {
     }
   }
 
+  _initPlayer () {
+    this.player = new Timidity(this.baseUrl)
+    this.player.once('playing', this._onPlaying)
+    this.player.once('ended', this._onEnded)
+    this.player.load(this.src)
+    this.player.play()
+  }
+
+  _destroyPlayer () {
+    this.player.pause()
+    this.player.destroy()
+    this.player.removeListener('playing', this._onPlaying)
+    this.player.removeListener('ended', this._onEnded)
+    this.player = null
+  }
+
+  _onPlaying () {
+    this._playingFired = true
+  }
+
+  _onEnded () {
+    this.playCount += 1
+
+    const loop = String(this.loop).toLowerCase()
+    if (loop === 'infinite' || loop === 'true' || loop === '-1' ||
+      Number(this.loop) > this.playCount) {
+      this._destroyPlayer()
+      this._initPlayer()
+    }
+  }
+
   _onClick () {
     if (!this._playingFired) this.player.play()
   }
@@ -106,16 +124,44 @@ function enableCompatMode (opts = {}) {
   `)
 
   whenDomReady().then(() => {
-    const embeds = Array.from(document.querySelectorAll('embed'))
+    const embeds = [
+      ...document.querySelectorAll('embed'),
+      ...document.querySelectorAll('bgsound')
+    ]
     embeds.forEach(embed => {
-      const src = embed.src
+      let src = embed.getAttribute('src')
+      const loop = embed.getAttribute('loop')
       embed.remove()
 
-      const bgSound = document.createElement('bg-sound')
-      bgSound.setAttribute('src', src)
-      if (opts.baseUrl) bgSound.setAttribute('baseUrl', opts.baseUrl)
+      src = new URL(src, window.location.href).href
+      console.log(src)
 
-      document.body.appendChild(bgSound)
+      if (!src) return
+
+      if (src.endsWith('.mid') || src.endsWith('.midi')) {
+        const bgSound = document.createElement('bg-sound')
+        bgSound.setAttribute('src', src)
+        if (loop) bgSound.setAttribute('loop', loop)
+        if (opts.baseUrl) bgSound.setAttribute('baseUrl', opts.baseUrl)
+
+        document.body.appendChild(bgSound)
+      }
+
+      if (src.endsWith('.wav')) {
+        const audio = document.createElement('audio')
+        audio.src = src
+        audio.controls = false
+        audio.autoplay = true
+
+        let playingFired = false
+        audio.addEventListener('playing', () => {
+          playingFired = true
+        })
+        document.body.addEventListener('click', () => {
+          if (!playingFired) audio.play()
+        })
+        document.body.appendChild(audio)
+      }
     })
   })
 }
