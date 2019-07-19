@@ -21,7 +21,7 @@ class BgSound extends HTMLElement {
     document.addEventListener('click', this._onClick)
 
     if (!this.hasAttribute('baseUrl')) {
-      this.setAttribute('baseUrl', '/')
+      this.setAttribute('baseUrl', 'https://bitmidi.com/timidity/')
     }
 
     this.player = new Timidity(this.baseUrl)
