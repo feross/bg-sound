@@ -2,6 +2,8 @@
 
 const debug = require('debug')('bg-sound')
 const Timidity = require('timidity')
+const insertCss = require('insert-css')
+const whenDomReady = require('when-dom-ready')
 
 class BgSound extends HTMLElement {
   static get observedAttributes () {
@@ -96,4 +98,27 @@ class BgSound extends HTMLElement {
 
 window.customElements.define('bg-sound', BgSound)
 
+function enableCompatMode (opts = {}) {
+  insertCss(`
+    embed {
+      display: none;
+    }
+  `)
+
+  whenDomReady().then(() => {
+    const embeds = Array.from(document.querySelectorAll('embed'))
+    embeds.forEach(embed => {
+      const src = embed.src
+      embed.remove()
+
+      const bgSound = document.createElement('bg-sound')
+      bgSound.setAttribute('src', src)
+      if (opts.baseUrl) bgSound.setAttribute('baseUrl', opts.baseUrl)
+
+      document.body.appendChild(bgSound)
+    })
+  })
+}
+
 module.exports = BgSound
+module.exports.enableCompatMode = enableCompatMode
