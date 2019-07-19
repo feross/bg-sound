@@ -43,6 +43,7 @@ Automatically make legacy `<bgsound>` and `<embed>` HTML tags work:
 <embed src="goldensun.mid">
 <embed src="mario-death.mid" loop="2">
 <embed src="sound.wav">
+<embed src="sound.wav" loop=true>
 ```
 
 ## Talk
@@ -115,6 +116,7 @@ Include this code before any `<bgsound>` or `<embed>` HTML tags:
 <embed src="goldensun.mid">
 <embed src="mario-death.mid" loop="2">
 <embed src="sound.wav">
+<embed src="sound.wav" loop=true>
 ```
 
 If you want to provide your own `baseUrl`, then simply pass that into the `BgSound.enableCompatMode()` function call as follows:

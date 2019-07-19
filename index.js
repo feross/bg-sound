@@ -99,12 +99,12 @@ class BgSound extends HTMLElement {
   }
 
   _onEnded () {
+    this._destroyPlayer()
     this.playCount += 1
 
     const loop = String(this.loop).toLowerCase()
     if (loop === 'infinite' || loop === 'true' || loop === '-1' ||
       Number(this.loop) > this.playCount) {
-      this._destroyPlayer()
       this._initPlayer()
     }
   }
@@ -152,6 +152,10 @@ function enableCompatMode (opts = {}) {
         audio.src = src
         audio.controls = false
         audio.autoplay = true
+        if (loop && (loop.toLowerCase() === 'infinite' || loop === 'true' ||
+            loop === '-1' || Number(loop) >= 2)) {
+          audio.loop = true
+        }
 
         let playingFired = false
         audio.addEventListener('playing', () => {
