@@ -47,6 +47,7 @@
   },
   "scripts": {
     "build": "browserify -s BgSound -r ./ | minify > bg-sound.min.js",
+    "size": "npm run build && cat bg-sound.min.js | gzip | wc -c",
     "example": "node example/server.js",
     "test": "standard"
   }
