@@ -17,11 +17,11 @@
     "when-dom-ready": "^1.2.12"
   },
   "devDependencies": {
+    "babel-minify": "^0.5.1",
     "browserify": "^16.2.2",
     "express": "^4.16.4",
     "freepats": "^1.0.2",
-    "standard": "*",
-    "tinyify": "^2.5.2"
+    "standard": "*"
   },
   "homepage": "https://bitmidi.com",
   "keywords": [
@@ -46,8 +46,7 @@
     "url": "git://github.com/feross/bg-sound.git"
   },
   "scripts": {
-    "build": "browserify --plugin tinyify -s BgSound -r ./ > bg-sound.min.js",
-    "size": "npm run build && cat bg-sound.min.js | gzip | wc -c",
+    "size": "browserify -s BgSound -r ./ | minify | gzip | wc -c",
     "example": "node example/server.js",
     "test": "standard"
   }
