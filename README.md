@@ -22,7 +22,7 @@ Play MIDI files in a browser with a simple Web Component, emulating
 npm install bg-sound
 ```
 
-If you do not use a bundler, you can use the [standalone script](https://bundle.run/bg-sound) directly in a `<script>` tag.
+This package works in the browser with [browserify](https://browserify.org). If you do not use a bundler, you can use the [standalone script](https://bundle.run/bg-sound) directly in a `<script>` tag.
 
 ## Usage
 
